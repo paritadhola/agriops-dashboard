@@ -1,5 +1,5 @@
-import React from "react";
 import EquipmentCard from "./EquipmentCard";
+import React, { useEffect, useState } from "react";
 
 const equipmentList = [
   { id: 1, name: "Tractor A", status: "Active" },
@@ -8,6 +8,22 @@ const equipmentList = [
 ];
 
 function Dashboard() {
+  const [equipmentList, setEquipmentList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setEquipmentList([
+        { id: 1, name: "Tractor A", status: "Active" },
+        { id: 2, name: "Harvester B", status: "Idle" },
+        { id: 3, name: "Sprayer C", status: "Maintenance" },
+      ]);
+      setLoading(false);
+    }, 1500);
+  });
+
+  if (loading)
+    return <p style={{ padding: "1rem" }}>Loading equipment data...</p>;
   return (
     <div style={{ padding: "1rem" }}>
       <h2>Equipment Overview</h2>
